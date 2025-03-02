@@ -1,4 +1,5 @@
 //Nathan
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class WordGuess {
@@ -6,11 +7,11 @@ public class WordGuess {
 	Scanner scan = new Scanner(System.in);
 	String[] wordList = {"cat", "pie", "fork", "tree"};
 	int randomNum = randomGenerator.nextInt(wordList.length);
-	String keyword;
+	String keyword = wordList[randomNum];
 	boolean playGame = true;
-	char[] userGuesses = new char[keyword.length()];
+	char[] userGuesses;
 	boolean wordGuessed = false;
-	int guessesLeft = keyword.length();
+	int guessesLeft;
 	char letter;
 	char[] keyArray;
 
@@ -27,29 +28,31 @@ public class WordGuess {
 
 	}
 
-	public void initializeGameState() { //sets char array for secret word and guesses
-		 keyword = wordList[randomNum];
-		 keyArray = keyword.toCharArray();
-		 for (int i = 0; i < keyword.length(); i++) {
+	public char[] initializeGameState() { //sets char array for secret word and guesses
+		userGuesses = new char[keyword.length()];
+		guessesLeft = keyword.length();
+		keyArray = keyword.toCharArray();
+		for (int i = 0; i < keyword.length(); i++) {
 			userGuesses[i] = '_';
-		 }
+		}
+		return userGuesses;
 	}
 
 	public char getNextGuess() { //returns player input for guess
-		System.out.println("You have " + guessesLeft + " tries left");
 		System.out.println("Enter a single character: ");
 		String prompt = scan.next();
 		letter = prompt.charAt(0);
-		guessesLeft--;
 		return letter;
 	}
 
-	public void printCurrentState() { //use printArray to show correct player guesses
+	public int printCurrentState() { //use printArray to show correct player guesses
 		System.out.println("Current Guesses: ");
 		if (!wordGuessed && guessesLeft > 0) {
 			this.printArray();
 		}
-
+		System.out.println("You have " + guessesLeft + " tries left");
+		guessesLeft--;
+		return guessesLeft;
 	}
 
 	public char[] process() { //cycles thru word array and compares against input guess, replaces _ if correct
@@ -66,12 +69,15 @@ public class WordGuess {
 	}
 
 	public boolean isWordGuessed() { //return boolean, if true display win message
-		if (keyword.equals(userGuesses.toString())) {
+		if (guessesLeft <= 0 && !(Arrays.equals(userGuesses, keyArray))) {
+			this.playerLost();
+			return wordGuessed = false;
+		} else if (guessesLeft <= 0 || !(Arrays.equals(userGuesses, keyArray))) {
+			this.playerLost();
+			return wordGuessed = false;
+		} else {
 			this.playerWon();
 			return wordGuessed = true;
-		} else {
-			this.playerLost();
-			return false;
 		}
 	}
 
@@ -96,6 +102,10 @@ public class WordGuess {
 		}
 	}
 
+	public void gameOver() {
+		System.out.println("Game over.");
+	}
+
 	public void runGame() { //pulls the methods written to run the game
 		while (playGame) {
 			this.announceGame();
@@ -110,7 +120,7 @@ public class WordGuess {
 
 		this.askToPlayAgain();
 		}
-		System.out.println("Game Over");
+		this.gameOver();
 	}
 
 	public static void main(String[] args) {
