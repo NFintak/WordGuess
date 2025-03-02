@@ -18,10 +18,10 @@ public class WordGuess {
 
 	public void announceGame() { //welcome message
 		System.out.println("Let's Play Wordguess version 1.0");
-		wordGuessed = false;
 	}
 
 	public char[] initializeGameState() { //sets char array for secret word and guesses
+		wordGuessed = false;
 		userGuesses = new char[keyword.length()];
 		guessesLeft = keyword.length() + 1;
 		keyArray = keyword.toCharArray();
@@ -29,13 +29,14 @@ public class WordGuess {
 			userGuesses[i] = '_';
 		}
 		return userGuesses;
-	}
+	}  //
 
 	public char getNextGuess() { //returns player input for guess
 		System.out.println("Enter a single character: ");
 		String prompt = scan.next();
 		letter = prompt.charAt(0);
 		return letter;
+		//add booleans
 	}
 
 	public char[] printArray() { //formats user guesses with spaces
@@ -60,7 +61,7 @@ public class WordGuess {
 				userGuesses[i] = letter;
 			} else {
 				i++;
-			}
+			}  // check if key word has been guessed or if user is out of guesses
 		}
 		return userGuesses;
 	}
@@ -74,7 +75,7 @@ public class WordGuess {
 			wordGuessed = true;
 		} else {
 			wordGuessed = false;
-		}
+		} // move if/else sections here to process()
 		guessesLeft--;
 		return wordGuessed;
 	}
@@ -103,13 +104,14 @@ public class WordGuess {
 
 	public void gameOver() {
 		System.out.println("Game over.");
+
 	}
 
 	public void runGame() { //pulls the methods written to run the game
 		this.initializeGameState();
 		while (playGame == true) {
 			this.announceGame();
-			while(wordGuessed == false) {
+			while(wordGuessed == false) { // and guesses more than zero
 
 				this.printCurrentState(); // current status goes here
 				this.getNextGuess();
