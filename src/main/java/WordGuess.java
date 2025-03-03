@@ -36,6 +36,7 @@ public class WordGuess {
 		for (int i = 0; i < this.keyword.length(); i++) {
 			userGuesses[i] = '_';
 		}
+		//use setCharAt() for this part?
 		return userGuesses;
 	}
 
@@ -68,6 +69,7 @@ public class WordGuess {
 			if (letter == keyArray[i] && userGuesses[i] == '_') {
 				userGuesses[i] = letter;
 			} // check if key word has been guessed or if user is out of guesses
+			//use setCharAt() for this part?
 		}
 		if (guessesLeft == 0 && !(Arrays.equals(userGuesses, keyArray))) {
 			wordGuessed = false;
