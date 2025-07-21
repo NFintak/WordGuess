@@ -13,7 +13,7 @@ public class WordGuess {
 	int randomNum = randomGenerator.nextInt(wordList.length);
 	String keyword;
 	//char[] userGuesses = new char[keyword.length()]; //change to arraylist
-	ArrayList<Character> userGuesses;
+	ArrayList<Character> userGuesses = new ArrayList<>();
 	boolean wordGuessed;
 	int guessesLeft;
 	char letter;
@@ -47,7 +47,9 @@ public class WordGuess {
 		guessesLeft = keyword.length();
 		for (int i = 0; i < keyword.length(); i++) {
 			userGuesses.add('_');
+			keyArray.add(keyword.charAt(i));
 		}
+
 		return userGuesses;
 	}
 
