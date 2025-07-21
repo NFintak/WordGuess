@@ -1,19 +1,22 @@
 //Nathan
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 
 public class WordGuess {
-	java.util.Random randomGenerator = new java.util.Random();
+	Random randomGenerator = new java.util.Random();
 	Scanner scan = new Scanner(System.in);
 	boolean playAgain;
-	String[] wordList = {"cat", /*"pie", "fork",*/ "tree"};
+	String[] wordList = {"cat", "pie", "fork", "tree"}; //leave this as an array
 	int randomNum = randomGenerator.nextInt(wordList.length);
 	String keyword = wordList[randomNum];
-	char[] userGuesses = new char[keyword.length()]; //make empty array
+	char[] userGuesses = new char[keyword.length()]; //change to arraylist
 	boolean wordGuessed;
 	int guessesLeft = keyword.length();
 	char letter;
-	char[] keyArray = keyword.toCharArray();
+	char[] keyArray = keyword.toCharArray(); //change to arraylist
 
 	//keyword = wordList[randomNum];
 	//userGuesses = new char[keyword.length()];
