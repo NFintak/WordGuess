@@ -12,18 +12,12 @@ public class WordGuess {
 	String[] wordList = {"cat", "pie", "fork", "tree"}; //leave this as an array
 	int randomNum = randomGenerator.nextInt(wordList.length);
 	String keyword;
-	//char[] userGuesses = new char[keyword.length()]; //change to arraylist
 	ArrayList<Character> userGuesses = new ArrayList<>();
 	boolean wordGuessed;
 	int guessesLeft;
 	char letter;
-	//char[] keyArray = keyword.toCharArray(); //change to arraylist
 	ArrayList<Character> keyArray = new ArrayList<>();
 
-	//keyword = wordList[randomNum];
-	//userGuesses = new char[keyword.length()];
-	//guessesLeft = keyword.length();
-	//keyArray = keyword.toCharArray();
 	/*
 	class keyword {
 		String word;
@@ -31,18 +25,9 @@ public class WordGuess {
 	*/
 	public void announceGame() { //welcome message
 		System.out.println("Let's Play Wordguess version 1.0");
-		//playAgain = true;
 	}
 
 	public ArrayList<Character> initializeGameState() { //sets char array for secret word and guesses
-//		keyword = wordList[randomNum];
-//		userGuesses = new char[this.keyword.length()];
-//		guessesLeft = this.keyword.length();
-//		keyArray = this.keyword.toCharArray();
-//		for (int i = 0; i < this.keyword.length(); i++) {
-//			userGuesses[i] = '_';
-//		}
-//		return userGuesses;
 		keyword = wordList[randomNum];
 		guessesLeft = keyword.length();
 		for (int i = 0; i < keyword.length(); i++) {
@@ -81,7 +66,6 @@ public class WordGuess {
 			if (letter == keyArray.get(i) && userGuesses.get(i) == '_') {
 				userGuesses.set(i, letter);
 			} // check if letter in keyword has been guessed
-			//use setCharAt() for this part?
 		}
 		if (guessesLeft == 0 && !(Arrays.equals(userGuesses.toArray(), keyArray.toArray()))) {
 			wordGuessed = false;
@@ -100,18 +84,17 @@ public class WordGuess {
 		}
 	}
 
-	public void /*boolean*/ playerWon() { //display win message
+	public void playerWon() { //display win message
 		System.out.println("**** ****");
 		System.out.println(userGuesses);
 		System.out.println("Congratulations, You Won!");
-		//return wordGuessed = false;
+
 	}
 
-	public void /*boolean*/ playerLost() { //display lose message
+	public void playerLost() { //display lose message
 		System.out.println(":'( :'( :'(");
 		System.out.println(userGuesses);
 		System.out.println("You Lost! You ran out of guesses.");
-		//return wordGuessed = true;
 	}
 
 	public boolean askToPlayAgain() { //return boolean, if false leave while loop
@@ -126,7 +109,6 @@ public class WordGuess {
 		} else {
 			return playAgain = false;
 		}
-		//return false;
 	}
 
 	public void gameOver() {
@@ -136,10 +118,10 @@ public class WordGuess {
 	public void runGame() { //pulls the methods written to run the game
 		playAgain = true;
 		this.announceGame();
-		while (playAgain == true) {
+		while (playAgain) {
 			initializeGameState();
 			wordGuessed = false;
-			while (wordGuessed == false) { // and guesses more than zero
+			while (!wordGuessed) { // and guesses more than zero
 				printCurrentState(); // current status goes here
 				getNextGuess();
 				process();
